@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Currency Converter</h2>
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" placeholder="Enter amount">
+    <br>
+    <label for="from">From:</label>
+    <select id="from">
+        <option>USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>JPY</option>
+        <option>CAD</option>
+    </select>
+    <br>
+    <label for="to">To:</label>
+    <select id="to">
+        <option>USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>JPY</option>
+        <option>CAD</option>
+    </select>
+    <br>
+    <button onclick="convert()">Convert</button>
+    <div id="result"></div>
+
+    <script>
+        const rates = {
+            'USD-EUR': 0.85,
+            'USD-GBP': 0.73,
+            'USD-JPY': 111.20,
+            'USD-CAD': 1.27,
+            'EUR-USD': 1.18,
+            'EUR-GBP': 0.86,
+            'EUR-JPY': 130.89,
+            'EUR-CAD': 1.48,
+            'GBP-USD': 1.38,
+            'GBP-EUR': 1.16,
+            'GBP-JPY': 152.22,
+            'GBP-CAD': 1.73,
+            'JPY-USD': 0.009,
+            'JPY-EUR': 0.008,
+            'JPY-GBP': 0.007,
+            'JPY-CAD': 0.011,
+            'CAD-USD': 0.79,
+            'CAD-EUR': 0.68,
+            'CAD-GBP': 0.58,
+            'CAD-JPY': 88.11
+        };
+        function convert() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('from').value;
+            const toCurrency = document.getElementById('to').value;
+            const conversionRate = rates[`${fromCurrency}-${toCurrency}`];
+            const convertedAmount = amount * (conversionRate || 1);
+            document.getElementById('result').innerText = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+        }
+    </script>
+</body>
+
+</html>
